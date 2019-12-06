@@ -26,3 +26,7 @@ Route::get('/test/redis2','Test\TestController@redis2');
 
 Route::get('/test/baidu','Test\TestController@baidu');
 
+//微信开发
+
+Route::get('/wx','WeiXin\WxController@wechat');
+
