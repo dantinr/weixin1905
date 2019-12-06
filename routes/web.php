@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/info',function(){
+	phpinfo();
+});
+Route::get('/test/hello','Test\TestController@hello');
+Route::get('/test/adduser','User\LoginController@addUser');
+Route::get('/test/redis1','Test\TestController@redis1');
+Route::get('/test/redis2','Test\TestController@redis2');
+
