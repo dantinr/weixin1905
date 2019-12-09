@@ -9,6 +9,9 @@ class WxController extends Controller
 {
 
 
+    /**
+     * 处理接入
+     */
     public function wechat()
     {
         $token = '2259b56f5898cd6192c50';       //开发提前设置好的 token
@@ -27,5 +30,26 @@ class WxController extends Controller
         }else{
             die("not ok");
         }
+    }
+
+
+    /**
+     * 接收微信推送事件
+     */
+    public function receiv()
+    {
+        $log_file = "wx.log";
+        //将接收的数据记录到日志文件
+        $data = json_encode($_POST);
+        file_put_contents($log_file,$data,FILE_APPEND);     //追加写
+    }
+
+
+    /**
+     * 获取用户基本信息
+     */
+    public function getUserInfo()
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN';
     }
 }
