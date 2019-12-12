@@ -84,7 +84,7 @@ class WxController extends Controller
 </xml>';
                 echo $xml;
             }else{
-                //获取用户信息
+                //获取用户信息 zcza
                 $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->access_token.'&openid='.$openid.'&lang=zh_CN';
                 $user_info = file_get_contents($url);       //
                 $u = json_decode($user_info,true);
