@@ -245,8 +245,8 @@ class WxController extends Controller
         //获取素材内容
         $client = new Client();
         $response = $client->request('GET',$url);
-        $f = $response->getHeader('Content-disposition')[0];
         //获取文件扩展名
+        $f = $response->getHeader('Content-disposition')[0];
         $extension = substr(trim($f,'"'),strpos($f,'.'));
         //获取文件内容
         $file_content = $response->getBody();
