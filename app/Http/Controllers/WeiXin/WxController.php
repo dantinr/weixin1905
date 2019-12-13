@@ -187,6 +187,23 @@ class WxController extends Controller
 
             echo $response;
 
+        }elseif($msg_type=='video'){
+            // 下载小视频
+            $this->getMedia2($media_id,$msg_type);
+            // 回复
+            $response = '<xml>
+  <ToUserName><![CDATA['.$touser.']]></ToUserName>
+  <FromUserName><![CDATA['.$fromuser.']]></FromUserName>
+  <CreateTime>'.time().'</CreateTime>
+  <MsgType><![CDATA[video]]></MsgType>
+  <Video>
+    <MediaId><![CDATA['.$media_id.']]></MediaId>
+    <Title><![CDATA[测试]]></Title>
+    <Description><![CDATA[不可描述]]></Description>
+  </Video>
+</xml>';
+            echo $response;
+
         }
 
     }
@@ -228,10 +245,9 @@ class WxController extends Controller
         //获取素材内容
         $client = new Client();
         $response = $client->request('GET',$url);
-        //获取文件类型
-        $content_type = $response->getHeader('Content-Type')[0];
-        $pos = strpos($content_type,'/');
-        $extension = '.' . substr($content_type,$pos+1);
+        $f = $response->getHeader('Content-disposition')[0];
+        //获取文件扩展名
+        $extension = substr(trim($f,'"'),strpos($f,'.'));
         //获取文件内容
         $file_content = $response->getBody();
 
@@ -243,6 +259,10 @@ class WxController extends Controller
         }elseif($media_type=='voice'){  //保存语音文件
             $file_name = date('YmdHis').mt_rand(11111,99999) . $extension;
             $save_path = $save_path . 'voice/' . $file_name;
+        }elseif($media_type=='video')
+        {
+            $file_name = date('YmdHis').mt_rand(11111,99999) . $extension;
+            $save_path = $save_path . 'video/' . $file_name;
         }
 
         file_put_contents($save_path,$file_content);
