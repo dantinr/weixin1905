@@ -267,4 +267,13 @@ class WxController extends Controller
 
         file_put_contents($save_path,$file_content);
     }
+
+    /**
+     * 刷新 access_token
+     */
+    public function flushAccessToken()
+    {
+        $key = 'wx_access_token';
+        Redis::del($key);
+    }
 }
