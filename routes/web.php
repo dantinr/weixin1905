@@ -29,6 +29,9 @@ Route::get('/test/baidu','Test\TestController@baidu');
 
 //微信开发
 
+Route::get('/wx/test','WeiXin\WxController@test');
 Route::get('/wx','WeiXin\WxController@wechat');
 Route::post('/wx','WeiXin\WxController@receiv');        //接收微信的推送事件
+Route::get('/wx/media','WeiXin\WxController@getMedia');        //获取临时素材
+
 

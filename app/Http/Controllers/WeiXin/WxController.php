@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WeiXin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\WxUserModel;
+use Illuminate\Support\Facades\Redis;
 
 class WxController extends Controller
 {
@@ -20,11 +21,28 @@ class WxController extends Controller
     }
 
 
+    public function test()
+    {
+        echo $this->access_token;
+    }
+
+
     protected function getAccessToken()
     {
+
+        $key = 'wx_access_token';
+
+        $access_token = Redis::get($key);
+        if($access_token){
+            return $access_token;
+        }
+
         $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_APPSECRET');
         $data_json = file_get_contents($url);
         $arr = json_decode($data_json,true);
+
+        Redis::set($key,$arr['access_token']);
+        Redis::expire($key,3600);
         return $arr['access_token'];
     }
 
@@ -146,5 +164,21 @@ class WxController extends Controller
         $json_str = file_get_contents($url);
         $log_file = 'wx_user.log';
         file_put_contents($log_file,$json_str,FILE_APPEND);
+    }
+
+    /**
+     * 获取素材
+     */
+    public function getMedia()
+    {
+        $media_id = 'LsQfuUD9FHX2YHU0b12klYWb-ROKllTASw6ToClSCWG4MRNieqj95LDoA3muVelv';
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->access_token.'&media_id='.$media_id;
+
+        //下载图片
+        $img = file_get_contents($url);
+        // 保存文件
+        file_put_contents('cat.jpg',$img);
+
+        echo "下载图片成功";
     }
 }
