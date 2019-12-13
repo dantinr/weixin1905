@@ -169,6 +169,7 @@ class WxController extends Controller
     <MediaId><![CDATA['.$media_id.']]></MediaId>
   </Image>
 </xml>';
+            echo $response;
 
         }elseif($msg_type=='voice'){          // 语音消息
             // 下载语音
@@ -183,6 +184,9 @@ class WxController extends Controller
     <MediaId><![CDATA['.$media_id.']]></MediaId>
   </Voice>
 </xml>';
+
+            echo $response;
+
         }
 
     }
