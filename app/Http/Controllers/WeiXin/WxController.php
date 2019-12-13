@@ -275,5 +275,7 @@ class WxController extends Controller
     {
         $key = 'wx_access_token';
         Redis::del($key);
+        echo $this->getAccessToken();
+
     }
 }
