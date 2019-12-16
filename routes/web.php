@@ -12,13 +12,6 @@
 */
 
 Route::get('/', function () {
-
-    $file_name = "abc.mp3";
-    $info = pathinfo($file_name);
-
-    echo $file_name . '的文件扩展名为000 : ' . pathinfo($file_name)['extension'];die;
-    echo '<pre>';print_r($info);echo '</pre>';die;
-
     return view('welcome');
 });
 
