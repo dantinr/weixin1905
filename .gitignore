@@ -12,4 +12,4 @@ npm-debug.log
 .idea/
 yarn-error.log
 public/*.log
-bug.php
+public/wx_media/
