@@ -89,4 +89,5 @@ class WxUserController extends AdminController
 
         return $form;
     }
+
 }
