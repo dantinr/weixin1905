@@ -344,4 +344,5 @@ class WxController extends Controller
         echo $response->getBody();      //接收 微信接口的响应数据
 
     }
+
 }

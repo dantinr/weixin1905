@@ -70,4 +70,31 @@ class TestController extends Controller
 
     }
 
+    public function redisHash(){
+        $u = [
+            'openid'    => 'sldkfjsldf',
+            'nickname'  => 'zhangsan',
+            'email'     => 'zhangsan@qq.com',
+            'age'       => 33,
+            'sex'       => 1,
+        ];
+
+//        $k = '1905_h:u:123';
+//
+//        $redis = new \Redis();
+//        $redis->connect('127.0.0.1');
+//        $u = $redis->hMGet($k,['nickname','email']);
+//        echo '<pre>';print_r($u);echo '</pre>';
+//        echo '<hr>';
+
+        $k = 'h:u:123';
+        //Redis::hMset($k,$u);
+        $user_info = Redis::hMget($k,true,["nickname","email"]);
+        var_dump($user_info);echo '<hr>';
+        //$user_info = Redis::hMget($k,['openid','nickname','email']);
+        //$user_info = Redis::hMget($k,array('openid','nickname','email'));
+        echo '<pre>';print_r($user_info);echo '</pre>';
+
+    }
+
 }

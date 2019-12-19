@@ -27,6 +27,7 @@ Route::get('/test/xml','Test\TestController@xmlTest');
 Route::get('/dev/redis/del','VoteController@delKey');
 
 Route::get('/test/baidu','Test\TestController@baidu');
+Route::get('/test/redis/hash','Test\TestController@redisHash');
 
 //微信开发
 
