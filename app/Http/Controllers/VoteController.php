@@ -38,7 +38,7 @@ class VoteController extends Controller
 
         //判断是否已经投过票
         if(Redis::zrank($key,$user_info['openid'])){
-            echo "已经投过票了";
+            echo "已经投过票了";echo '</br>';
         }else{
             Redis::Zadd($key,time(),$openid);
         }
@@ -49,7 +49,7 @@ class VoteController extends Controller
             $u_k = 'h:u:'.$k;
             $u = Redis::hgetAll($u_k);
             //$u = Redis::hMget($u_k,['openid','nickname','sex','headimgurl']);
-            echo '<img src="'.$u['headimgurl'].'">';echo '</br>';
+            echo ' <img src="'.$u['headimgurl'].'"> ';
         }
     }
 
