@@ -181,6 +181,21 @@ class WxController extends Controller
   <MsgType><![CDATA[text]]></MsgType>
   <Content><![CDATA['.$content.']]></Content>
 </xml>';
+//            $response_text = '<xml>
+//  <ToUserName><![CDATA['.$touser.']]></ToUserName>
+//  <FromUserName><![CDATA['.$fromuser.']]></FromUserName>
+//  <CreateTime>'.time().'</CreateTime>
+//  <MsgType><![CDATA[news]]></MsgType>
+//  <ArticleCount>1</ArticleCount>
+//  <Articles>
+//    <item>
+//      <Title><![CDATA[作业做完了吗！]]></Title>
+//      <Description><![CDATA[作业做完了吗！]]></Description>
+//      <PicUrl><![CDATA[picurl]]></PicUrl>
+//      <Url><![CDATA[url]]></Url>
+//    </item>
+//  </Articles>
+//</xml>';
             echo $response_text;            // 回复用户消息
 
 

@@ -29,4 +29,7 @@ class WxUserModel extends Model
         Redis::expire($key,3600);
         return $arr['access_token'];
     }
+
+
+
 }

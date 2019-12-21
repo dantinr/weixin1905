@@ -16,5 +16,6 @@ Route::group([
     $router->resource('users', WxUserController::class);
     $router->resource('goods', GoodsController::class);      //商品管理
 
+    $router->resource('wx/media/img', WxMediaImg::class);       // 图片素材管理
 
 });

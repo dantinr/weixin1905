@@ -33,6 +33,8 @@ class WxMsgController extends AdminController
 
         $msg = date('Y-m-d H:i:s') . '快要放寒假了，准备好寒假作业了吗';
 
+
+
         $data = [
             'touser'    => $openid,
             'msgtype'   => 'text',
