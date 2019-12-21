@@ -49,3 +49,7 @@ Route::get('/vote','VoteController@index');        //微信投票
 Route::get('/goods/detail','Goods\IndexController@detail');        //商品详情
 
 
+//计划任务
+Route::get('/crontab/send_msg','Crontab\WeiXinController@sendMsg');        // 定时群发
+
+
