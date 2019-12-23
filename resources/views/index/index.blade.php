@@ -611,12 +611,38 @@
 <!-- end footer -->
 
 <!-- scripts -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/materialize.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/fakeLoader.min.js"></script>
 <script src="js/animatedModal.min.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+    wx.config({
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: "{{$wx_config['appId']}}", // 必填，公众号的唯一标识
+        timestamp: "{{$wx_config['timestamp']}}", // 必填，生成签名的时间戳
+        nonceStr: "{{$wx_config['nonceStr']}}", // 必填，生成签名的随机串
+        signature: "{{$wx_config['signature']}}",// 必填，签名
+        jsApiList: ['updateAppMessageShareData'] // 必填，需要使用的JS接口列表
+    });
+
+    wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+        wx.updateAppMessageShareData({
+            title: '分享测试', // 分享标题
+            desc: '描述', // 分享描述
+            link: 'http://wx1905.comcto.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: '', // 分享图标
+            success: function () {
+                // 设置成功
+                alert(11111);
+            }
+        })
+    });
+
+</script>
 
 </body>
 </html>

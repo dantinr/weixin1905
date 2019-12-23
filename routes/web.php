@@ -21,7 +21,11 @@ Route::get('/','Index\IndexController@index');      //网站首页
 Route::get('/info',function(){
 	phpinfo();
 });
-Route::get('/test/hello','Test\TestController@hello');
+Route::get('/test/hello',function(){
+    $current_url = $_SERVER['APP_URL'] . $_SERVER['REQUEST_URI'];
+    echo 'CURRENT_URL: '.$current_url;echo '</br>';
+    echo '<pre>';print_r($_SERVER);echo '</pre>';
+});
 Route::get('/test/adduser','User\LoginController@addUser');
 Route::get('/test/redis1','Test\TestController@redis1');
 Route::get('/test/redis2','Test\TestController@redis2');
