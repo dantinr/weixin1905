@@ -626,10 +626,11 @@
         timestamp: "{{$wx_config['timestamp']}}", // 必填，生成签名的时间戳
         nonceStr: "{{$wx_config['nonceStr']}}", // 必填，生成签名的随机串
         signature: "{{$wx_config['signature']}}",// 必填，签名
-        jsApiList: ['updateAppMessageShareData','chooseImage'] // 必填，需要使用的JS接口列表
+        jsApiList: ['updateAppMessageShareData','chooseImage','updateTimelineShareData'] // 必填，需要使用的JS接口列表
     });
 
     wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+        //发送给朋友
         wx.updateAppMessageShareData({
             title: '分享测试', // 分享标题
             desc: '描述', // 分享描述
@@ -640,6 +641,19 @@
                 alert(11111);
             }
         })
+
+        //分享到盆友圈
+        wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+            wx.updateTimelineShareData({
+                title: '分享测试', // 分享标题
+                link: 'http://wx1905.comcto.com/img/2ha.jpg', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: 'http://wx1905.comcto.com/img/2ha.jpg', // 分享图标
+                success: function () {
+                    alert("分享成功");
+                }
+            })
+        });
+
     });
 
 </script>
