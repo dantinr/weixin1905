@@ -13,19 +13,6 @@ class IndexController extends Controller
 
     public function index()
     {
-        $code = $_GET['code'];
-        $data = $this->getAccessToken($code);
-
-        //判断用户是否已存在
-        $openid = $data['openid'];
-        $u = WxUserModel::where(['openid'=>$openid])->first();
-        if($u){     //用户已存在
-            $user_info = $u->toArray();
-        }else{
-            $user_info = $this->getUserInfo($data['access_token'],$data['openid']);
-            //入库
-            WxUserModel::insertGetId($user_info);
-        }
 
         //微信配置
         $nonceStr = Str::random(8);
@@ -41,7 +28,7 @@ class IndexController extends Controller
         $wx_config['signature'] = $jsapi_signature;
 
         $data = [
-            'u'         => $user_info,
+            //'u'         => $user_info,
             'wx_config' => $wx_config
         ];
         return view('index.index',$data);

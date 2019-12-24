@@ -24,6 +24,32 @@ class WxController extends Controller
     }
 
 
+
+
+    // 微信网页授权登录
+    public function login()
+    {
+
+        $code = $_GET['code'];
+        $data = $this->getAccessToken($code);
+
+        //判断用户是否已存在
+        $openid = $data['openid'];
+        $u = WxUserModel::where(['openid'=>$openid])->first();
+        if($u){     //用户已存在
+            $user_info = $u->toArray();
+        }else{
+            $user_info = $this->getUserInfo($data['access_token'],$data['openid']);
+            //入库
+            WxUserModel::insertGetId($user_info);
+        }
+
+
+        return redirect('/');
+
+    }
+
+
     public function test()
     {
         echo $this->access_token;
@@ -331,7 +357,7 @@ class WxController extends Controller
     {
 
         $url = 'http://wx1905.comcto.com/vote';
-        $url2 = 'http://wx1905.comcto.com/';
+        $url2 = 'http://wx1905.comcto.com/wx/login';
         $redirect_uri = urlencode($url);        //授权后跳转页面
         $redirect_uri2 = urlencode($url2);        //授权后跳转页面
 
@@ -357,7 +383,7 @@ class WxController extends Controller
             ]
         ];
 
-        echo '<pre>';print_r($menu);echo '</pre>';die;
+        //echo '<pre>';print_r($menu);echo '</pre>';die;
         $menu_json = json_encode($menu,JSON_UNESCAPED_UNICODE);
         $client = new Client();
         $response = $client->request('POST',$url,[
