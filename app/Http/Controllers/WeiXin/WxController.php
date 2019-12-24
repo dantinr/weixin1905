@@ -30,14 +30,20 @@ class WxController extends Controller
     public function login()
     {
 
+        // 1 获取code
         $code = $_GET['code'];
-        $data = $this->getAccessToken($code);
+
+        // 2 根据code 换取access_token
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".env('WX_APPID')."&secret=".env('WX_APPSECRET')."&code={$code}&grant_type=authorization_code";
+        
+        $res_json = file_get_contents($url);    // 请求接口，获取json响应
+        $data = json_decode($res_json,true);    // 将json转换为数组
 
         //判断用户是否已存在
         $openid = $data['openid'];
         $u = WxUserModel::where(['openid'=>$openid])->first();
         if($u){     //用户已存在
-            $user_info = $u->toArray();
+            
         }else{
             $user_info = $this->getUserInfo($data['access_token'],$data['openid']);
             //入库
