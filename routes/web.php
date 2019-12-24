@@ -44,6 +44,7 @@ Route::get('/wx/media','WeiXin\WxController@getMedia');        //获取临时素
 Route::get('/wx/flush/access_token','WeiXin\WxController@flushAccessToken');        //刷新access_token
 Route::get('/wx/menu','WeiXin\WxController@createMenu');        //创建菜单
 Route::get('/wx/qrcode','WeiXin\WxQRController@qrcode');        //创建才参数的我二维码
+Route::get('/wx/newyear','WeiXin\WxController@newYear');        //元旦活动页面
 
 
 //微信公众号
